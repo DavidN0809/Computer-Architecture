@@ -80,7 +80,7 @@ vector<pair<int, int>> insertionSort(vector<pair<int, int>> events) {
         pair<int, int> temp = events[j];
         int i = j - 1;
         
-        while (i > 0 && events[i].second >= temp.second) {
+        while (i >= 0 && events[i].second >= temp.second) {
             events[i + 1] = events[i];
             i = i - 1;
         }
