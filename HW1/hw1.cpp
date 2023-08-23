@@ -59,6 +59,7 @@ int main() {
        events = addNewEvent(events);
        events = insertionSort(events);
     }
+    cout << "\nSorted list:\n";
     printMEQ(events);
     
     return 0;
@@ -123,7 +124,7 @@ void printMEQ(vector<pair<int, int>> events) {
     for (int i = 0; i < n; i++)
         cout << "(" << events[i].first << ", " << events[i].second << ")\n";
 
-    cout << "Size of events vector: " << events.size() << "\n";
+    cout << "Size of events vector: " << events.size() << "\n\n";
 }
 
 //******************************************************************************
