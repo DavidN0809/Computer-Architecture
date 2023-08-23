@@ -1,5 +1,4 @@
 # Computer-Architecture
-ECGR 5181
 Assignments and Projects are broken into subfolders, description of each assignment and projects are below.
 
 ## HW1
