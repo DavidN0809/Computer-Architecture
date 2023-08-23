@@ -1,37 +1,25 @@
+//******************************************************************************
+// Libraries
+//******************************************************************************
 #include <iostream>
 #include <ctime>
 #include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 
-int randomNoGenerator() {
-    srand((unsigned) clock());
-    int random = rand();
-    
-    return random;
-}
-
-int getTime() {
-    time_t seconds;
-    seconds = clock();
-
-    return seconds;
-}
-
-void insertionSort(vector<pair<int, int>> arr, int n) {
-    for (int j = 1; j < n; j++) {
-        pair<int, int> key = arr[j];
-        int i = j - 1;
-            
-        while (i > 0 && arr[i].second >= key.second) {
-            arr[i + 1] = arr[i];
-            i = i - 1;
-        }
-        arr[i + 1] = key;
-    }
-}
+//******************************************************************************
+// Function Prototypes
+//******************************************************************************
+int randomNoGenerator(void);
+int getTime(void);
+vector<pair<int, int>> insertionSort(vector<pair<int, int>>);
+void printMEQ(vector<pair<int, int>>);
 
 
+//***********************************************************************************
+// Driver Code
+//***********************************************************************************
 int main() {
     vector<pair<int, int>> events;  // Vector to store events
     int t,v;
@@ -45,21 +33,70 @@ int main() {
     }
 
     // Print the generated events
-    for (const auto& event : events) {
-        cout << "Time: " << event.first << ", Value: " << event.second << endl;
-    }
-    printf("Size of events vector: %zu\n", events.size());
-
-
+    cout << "\nUnsorted list:\n";
+    printMEQ(events);
+    
     // Sort generated events
-    insertionSort(events, numEvents);
-
+    events = insertionSort(events);
+    // vector<pair<int, int>> events2 = insertionSort(events);
 
     // Print the sorted generated events
-    cout << "\nSorted list is \n";
-    for (int i = 0; i < numEvents; i++) {
-        cout << "(" << events[i].first << ", " << events[i].second << ")\n";
-    }
+    cout << "\nSorted list:\n";
+    printMEQ(events);
     
     return 0;
+}
+
+
+//***********************************************************************************
+// Functions
+//***********************************************************************************
+//******************************************************************************
+// 
+//******************************************************************************
+int randomNoGenerator(void) {
+    srand((unsigned) clock());
+    int random = rand();
+    
+    return random;
+}
+
+//******************************************************************************
+// 
+//******************************************************************************
+int getTime(void) {
+    time_t seconds;
+    seconds = clock();
+
+    return seconds;
+}
+
+//******************************************************************************
+// 
+//******************************************************************************
+vector<pair<int, int>> insertionSort(vector<pair<int, int>> events) {
+    int n = events.size();
+    for (int j = 1; j < n; j++) {
+        pair<int, int> temp = events[j];
+        int i = j - 1;
+        
+        while (i > 0 && events[i].second >= temp.second) {
+            events[i + 1] = events[i];
+            i = i - 1;
+        }
+        events[i + 1] = temp;
+    }
+    return events;
+}
+
+//******************************************************************************
+// 
+//******************************************************************************
+void printMEQ(vector<pair<int, int>> arr) {
+    int n = arr.size();
+    for (int i = 0; i < n; i++) {
+        cout << "(" << arr[i].first << ", " << arr[i].second << ")\n";
+        // cout << "Time: " << events[i].first << ", Value: " << events[i].second << endl;
+    }
+    // cout << "Size of events vector: " << arr.size() << "\n";
 }
