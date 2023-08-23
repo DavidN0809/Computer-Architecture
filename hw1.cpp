@@ -1,65 +1,65 @@
-/*
-Generate 20 events randomly. Each event E = (t, v) where t is time the event will be executed
-and v is an integer value (randomly generated) for printing. You can get t from the system time.
-*/
-
-#include<iostream>
-#include<ctime> // used to work with date and time
-#include<cstdlib>
-
-// C++ program to generate random number
+#include <iostream>
+#include <ctime>
 #include <bits/stdc++.h>
+
 using namespace std;
 
-// Function with return random number from 1 to
-// given limit
-
-int randomNoGenerator(){
-	// Providing a seed value
-	srand((unsigned) clock());
-
-	// Get a random number
-	int random = rand();
-        return random;
+int randomNoGenerator() {
+    srand((unsigned) clock());
+    int random = rand();
+    
+    return random;
 }
-int gettime(){
-  time_t seconds;
 
-  seconds = clock();
-  //printf ("%ld seconds since January 1, 1970", seconds);
-  return seconds;
+int getTime() {
+    time_t seconds;
+    seconds = clock();
+
+    return seconds;
 }
+
+void insertionSort(vector<pair<int, int>> arr, int n) {
+    for (int j = 1; j < n; j++) {
+        pair<int, int> key = arr[j];
+        int i = j - 1;
+            
+        while (i > 0 && arr[i].second >= key.second) {
+            arr[i + 1] = arr[i];
+            i = i - 1;
+        }
+        arr[i + 1] = key;
+    }
+}
+
 
 int main() {
     vector<pair<int, int>> events;  // Vector to store events
+    int t,v;
+    int numEvents = 20;
 
-// #1
-    for (int i = 0; i < 20; ++i) {
-        int t = gettime();
-        int v = randomNoGenerator();
-        events.push_back(make_pair(t, v));  // Add event to vector
+    // Generate random number and add event to vector
+    for (int i = 0; i < numEvents; ++i) {
+        t = getTime();
+        v = randomNoGenerator();
+        events.push_back(make_pair(t, v));
     }
 
     // Print the generated events
     for (const auto& event : events) {
         cout << "Time: " << event.first << ", Value: " << event.second << endl;
     }
+    printf("Size of events vector: %zu\n", events.size());
 
-// #2
-    for (int k = 1; k < 20; k++) {
-        pair<int, int> temp = events[k];
-        int j = k - 1;
-        while (j >= 0 && temp.second <= events[j].second) {
-            events[j + 1] = events[j];
-            j = j - 1;
-        }
-        events[j + 1] = temp;
-    }
 
+    // Sort generated events
+    insertionSort(events, numEvents);
+
+
+    // Print the sorted generated events
     cout << "\nSorted list is \n";
-    for (int i = 0; i < 20; i++) {
-        cout << "(" << events[i].first << ", " << events[i].second << ")\t";
+    for (int i = 0; i < numEvents; i++) {
+        cout << "(" << events[i].first << ", " << events[i].second << ")\n";
     }
-
+    
     return 0;
 }
