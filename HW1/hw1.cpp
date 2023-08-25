@@ -17,7 +17,6 @@ using namespace std;
 #define NUM_EVENTS 20
 #define MAX_EVENTS 100
 
-
 //******************************************************************************
 // Function Prototypes
 //******************************************************************************
@@ -121,7 +120,7 @@ vector<pair<int, int>> insertionSort(vector<pair<int, int>> events) {
 void printMEQ(vector<pair<int, int>> events) {
     int n = events.size();
     for (int i = 0; i < n; i++)
-        cout << "event: " << i << " " << events[i].second << "\n";
+        cout << "event " << i << ": " << events[i].second << "\n";
 
     //cout << "Size of events vector: " << events.size() << "\n";
 }
