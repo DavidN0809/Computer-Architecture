@@ -91,7 +91,7 @@ int seedRNG(int n) {
 //******************************************************************************
 int getTime(void) {
     time_t seconds;
-    seconds = clock();
+    ticks = clock();
 
     return seconds;
 }
