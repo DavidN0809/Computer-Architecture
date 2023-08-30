@@ -58,6 +58,8 @@ int main() {
        events = addNewEvent(events);
        events = insertionSort(events);
     }
+    
+    cout << "\nSorted list:\n";
     printMEQ(events);
     
     return 0;
@@ -90,10 +92,10 @@ int seedRNG(int n) {
 // Returns system cycles between instructions
 //******************************************************************************
 int getTime(void) {
-    time_t seconds;
+    time_t ticks;
     ticks = clock();
 
-    return seconds;
+    return ticks;
 }
 
 //******************************************************************************
@@ -121,8 +123,6 @@ void printMEQ(vector<pair<int, int>> events) {
     int n = events.size();
     for (int i = 0; i < n; i++)
         cout << "event " << i << ": " << events[i].second << "\n";
-
-    //cout << "Size of events vector: " << events.size() << "\n";
 }
 
 //******************************************************************************
@@ -130,10 +130,7 @@ void printMEQ(vector<pair<int, int>> events) {
 //******************************************************************************
 vector<pair<int, int>> addNewEvent(vector<pair<int, int>> events) {
     int temp = events[0].second;
-//    cout << "Earliest event: " << temp << "\n";
-    
     int t = getTime() + seedRNG(temp);
-    //int v = RNG();
     events.push_back(make_pair(t, temp));
     
     return events;
