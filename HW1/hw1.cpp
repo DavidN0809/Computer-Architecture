@@ -7,9 +7,12 @@
 #include <vector>
 #include <stdlib.h>
 #include <algorithm>
+#include <stdio.h>
+#include <cstdlib>
 
 using namespace std;
 
+typedef uint64_t tick_t;
 
 //******************************************************************************
 // Defines
@@ -17,12 +20,11 @@ using namespace std;
 #define NUM_EVENTS 20
 #define MAX_EVENTS 100
 
+
 //******************************************************************************
 // Function Prototypes
 //******************************************************************************
-int RNG(void);
-int seedRNG(int n);
-int getTime(void);
+int seedRNG(int);
 vector<pair<int, int>> insertionSort(vector<pair<int, int>>);
 void printMEQ(vector<pair<int, int>>);
 vector<pair<int, int>> addNewEvent(vector<pair<int, int>>);
@@ -33,12 +35,15 @@ vector<pair<int, int>> addNewEvent(vector<pair<int, int>>);
 //***********************************************************************************
 int main() {
     vector<pair<int, int>> events;  // Vector to store events
-    int t,v;
-
+    vector<pair<int, int>> processedEvents;
+    tick_t t;
+    int v;
+    srand((unsigned) clock());
+    
     // Generate random number and add event to vector
     for (int i = 0; i < NUM_EVENTS; ++i) {
-        t = getTime();
-        v = RNG();
+        t = clock();
+        v = rand() % 100;
         events.push_back(make_pair(t, v));
     }
 
@@ -54,13 +59,17 @@ int main() {
     printMEQ(events);
     
     // Add events and sort MEQ until 100 events have been processed
-    while(events.size() < MAX_EVENTS){
-       events = addNewEvent(events);
-       events = insertionSort(events);
+    while(processedEvents.size() < MAX_EVENTS){
+        time_t tt = events[0].first;
+        int vv = events[0].second;
+        processedEvents.push_back(make_pair(tt, vv));
+        // events.pop_back();
+        events.erase(events.begin());
+        events = addNewEvent(events);
+        events = insertionSort(events);
     }
-    
     cout << "\nSorted list:\n";
-    printMEQ(events);
+    printMEQ(processedEvents);
     
     return 0;
 }
@@ -69,33 +78,11 @@ int main() {
 // Functions
 //***********************************************************************************
 //******************************************************************************
-// RNG - using system clock as seed
-//******************************************************************************
-int RNG(void) {
-    srand((unsigned) clock());
-    int random = rand();
-    
-    return random;
-}
-
-//******************************************************************************
 // RNG - using passed int as seed
 //******************************************************************************
 int seedRNG(int n) {
     srand((unsigned) n);
-    int random = rand();
-    
-    return random;
-}
-
-//******************************************************************************
-// Returns system cycles between instructions
-//******************************************************************************
-int getTime(void) {
-    time_t ticks;
-    ticks = clock();
-
-    return ticks;
+    return rand() % 100;
 }
 
 //******************************************************************************
@@ -107,7 +94,7 @@ vector<pair<int, int>> insertionSort(vector<pair<int, int>> events) {
         pair<int, int> temp = events[j];
         int i = j - 1;
         
-        while (i >= 0 && events[i].second > temp.second) {
+        while (i >= 0 && events[i].first > temp.first) {
             events[i + 1] = events[i];
             i = i - 1;
         }
@@ -122,16 +109,22 @@ vector<pair<int, int>> insertionSort(vector<pair<int, int>> events) {
 void printMEQ(vector<pair<int, int>> events) {
     int n = events.size();
     for (int i = 0; i < n; i++)
-        cout << "event " << i << ": " << events[i].second << "\n";
+        cout << "Event "<< i << ": E = (" << events[i].first << ", " << events[i].second << ")\n";
+
+    cout << "Size of events vector: " << events.size() << "\n\n";
 }
 
 //******************************************************************************
 // Adds new event to MEQ
 //******************************************************************************
 vector<pair<int, int>> addNewEvent(vector<pair<int, int>> events) {
-    int temp = events[0].second;
-    int t = getTime() + seedRNG(temp);
-    events.push_back(make_pair(t, temp));
+    int t = events[0].first;
+    int v = events[0].second;
+
+    cout << "Earliest event: v = " << v << "\n";
+    
+    int tt = t + seedRNG(v);
+    events.push_back(make_pair(tt, v));
     
     return events;
 }
