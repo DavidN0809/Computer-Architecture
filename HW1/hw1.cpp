@@ -93,8 +93,8 @@ vector<pair<int, int>> insertionSort(vector<pair<int, int>> events) {
     for (int j = 1; j < n; j++) {
         pair<int, int> temp = events[j];
         int i = j - 1;
-        
-        while (i >= 0 && events[i].first > temp.first) {
+
+        while (i >= 0 && (events[i].first > temp.first || (events[i].first == temp.first && events[i].second > temp.second))) {
             events[i + 1] = events[i];
             i = i - 1;
         }
@@ -121,7 +121,7 @@ vector<pair<int, int>> addNewEvent(vector<pair<int, int>> events) {
     int t = events[0].first;
     int v = events[0].second;
 
-    cout << "Earliest event: v = " << v << "\n";
+    //cout << "Earliest event: v = " << v << "\n";
     
     int tt = t + seedRNG(v);
     events.push_back(make_pair(tt, v));
