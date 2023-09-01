@@ -121,7 +121,7 @@ vector<pair<int, int>> addNewEvent(vector<pair<int, int>> events) {
     int t = events[0].first;
     int v = events[0].second;
 
-    //cout << "Earliest event: v = " << v << "\n";
+    cout << "Earliest event: v = " << v << "\n";
     
     int tt = t + seedRNG(v);
     events.push_back(make_pair(tt, v));
