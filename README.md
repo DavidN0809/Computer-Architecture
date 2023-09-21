@@ -11,3 +11,18 @@ event E’ = (t’, v), where t’ = t + irand (v).
 5. Stop when 100 events have been processed from the MEQ.
 Use C++ for coding, and implement the MEQ using Vectors.
 ## HW2
+Implement a single threaded (no requirement of multi-threading) Event driven Simulator to execute the
+code segment for the complete “for loop” (code segment on pp.177 in textbook), including the last run
+of the loop when the predictively fetched instruction(s) from the front of the loop will have to be
+discarded, and the halt instruction executed.
+
+1) Each stage of the pipeline must Print() the {stage_name, instruction_name, data, clock cycle
+number} that is being processed in each stage.
+2) Print() the Event List contents for every clock cycle.
+Assume: Register x1 initially has the value 160 and Register x2 has the fixed value 0 for the following
+code:
+Loop: fld f0,0(x1)
+      fadd.d f4,f0,f2
+      fsd f4,0(x1)
+      addi x1,x1,-8
+      bne x1,x2,Loop
