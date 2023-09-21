@@ -21,6 +21,8 @@ number} that is being processed in each stage.
 2) Print() the Event List contents for every clock cycle.
 Assume: Register x1 initially has the value 160 and Register x2 has the fixed value 0 for the following
 code:
+
+```assembly
 Loop: fld f0,0(x1)
       fadd.d f4,f0,f2
       fsd f4,0(x1)
