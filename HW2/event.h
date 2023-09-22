@@ -21,6 +21,7 @@ public:
     void print() const {
         std::string instructionNames[] = { "NO_OP", "ld", "add", "sd", "addi", "bne"};
         std::cout << "Clock: " << clock_cycle << "\t" << instructionNames[fetch] << "\t" << instructionNames[decode] << "\t" << instructionNames[execute] << "\t" << instructionNames[store] << "\t" << "x1 => " << data << "\n";
+       // std::cout << instructionNames[fetch] << "(Fetch)." << clock_cycle << "\n";
     }
 };
 

@@ -1,29 +1,21 @@
-# Compiler and flags
+# Variables
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS = -Wall -std=c++11
+SOURCES = $(wildcard *.cpp)
+OBJECTS = $(SOURCES:.cpp=.o)
+TARGET = test
 
-# Executable name
-EXECUTABLE = test
+# Rules
+all: clean $(TARGET)
 
-# Source files
-SRCS = main.cpp
-
-# Object files
-OBJS = $(SRCS:.cpp=.o)
-
-# Include directories
-INCLUDES = -I.
-
-# Targets
-all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(EXECUTABLE) $(OBJS)
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(EXECUTABLE)
+	rm -f $(OBJECTS) $(TARGET)
 
 .PHONY: all clean
+
