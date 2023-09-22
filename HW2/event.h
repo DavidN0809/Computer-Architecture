@@ -6,7 +6,7 @@
 
 // Enum to represent the instructions in the instruction queue
 enum InstructionSet {
-    NO_OP, ld, add, sd, addi, bne
+    NO_OP, ld, add, sd, addi, bne, STALL
 };
 
 // Class to represent an event in the pipeline
@@ -19,7 +19,7 @@ public:
     
     // Function to print the details of an event
     void print() const {
-        std::string instructionNames[] = { "NO_OP", "ld", "add", "sd", "addi", "bne"};
+        std::string instructionNames[] = { "NO_OP", "ld", "add", "sd", "addi", "bne", "STALL"};
         std::cout << "Clock: " << clock_cycle << "\t" << instructionNames[fetch] << "\t" << instructionNames[decode] << "\t" << instructionNames[execute] << "\t" << instructionNames[store] << "\t" << "x1 => " << data << "\t|\t";
         std::cout << instructionNames[fetch] << "(Fetch)." << clock_cycle << "\t";
         if(decode != NO_OP){
