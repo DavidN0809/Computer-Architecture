@@ -56,6 +56,7 @@ public:
 
     // Function to print the events
     void printEvents() {
+        std::cout << "Part1 Output\t\t\t\t\t\t\t|Part2 Output\n";
         std::cout << "\t\tFetch\tDecode\tExecute\tStore\t\n";
         while (!events.empty()) {
             events.front().print();
