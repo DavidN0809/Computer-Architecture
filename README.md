@@ -25,4 +25,5 @@ Loop: fld f0,0(x1)
       bne x1,x2,Loop
 ```
 [hw2 visual aide](https://docs.google.com/spreadsheets/d/1Fxm5tvVx8mPrK7fk1-Mhpuf3QoQkFx3j7917Vq06N0o/edit#gid=0)
+
 In the above markdown, the text "Additional Resources for HW2" will be a clickable link that takes the user to the provided URL.
