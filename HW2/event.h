@@ -20,8 +20,18 @@ public:
     // Function to print the details of an event
     void print() const {
         std::string instructionNames[] = { "NO_OP", "ld", "add", "sd", "addi", "bne"};
-        std::cout << "Clock: " << clock_cycle << "\t" << instructionNames[fetch] << "\t" << instructionNames[decode] << "\t" << instructionNames[execute] << "\t" << instructionNames[store] << "\t" << "x1 => " << data << "\n";
-       // std::cout << instructionNames[fetch] << "(Fetch)." << clock_cycle << "\n";
+        std::cout << "Clock: " << clock_cycle << "\t" << instructionNames[fetch] << "\t" << instructionNames[decode] << "\t" << instructionNames[execute] << "\t" << instructionNames[store] << "\t" << "x1 => " << data << "\t|\t";
+        std::cout << instructionNames[fetch] << "(Fetch)." << clock_cycle << "\t";
+        if(decode != NO_OP){
+            std::cout << instructionNames[decode] << "(Decode)." << clock_cycle << "\t";
+        }
+        if(execute != NO_OP){
+            std::cout << instructionNames[execute] << "(Execute)." << clock_cycle << "\t";
+        }
+        if(store != NO_OP){
+            std::cout << instructionNames[store] << "(Store)." << clock_cycle << "\t";
+        }
+        std::cout << "\n";
     }
 };
 
